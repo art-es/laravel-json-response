@@ -21,5 +21,15 @@
         "psr-4": {
             "Artes\\JsonResponse\\": "src/JsonResponse/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Artes\\JsonResponse\\JsonResponseServiceProvider"
+            ],
+            "aliases": {
+                "JsonResponse": "Artes\\JsonResponse\\Facades\\JsonResponse"
+            }
+        }
     }
 }
