@@ -13,8 +13,13 @@ use function is_object;
  * Service for getting formatted JSON response.
  * @package App\Services
  */
-class JsonResponse extends BaseJsonResponse
+class JsonResponseService extends BaseJsonResponse
 {
+    public const
+        ERROR_TYPE_MESSAGE = 0,
+        ERROR_TYPE_VALIDATION = 1,
+        ERROR_TYPE_SYSTEM = 2;
+
     /**
      * Overridden property for set default value.
      *
@@ -25,18 +30,27 @@ class JsonResponse extends BaseJsonResponse
     /**
      * Set success field to false.
      *
+     * @param  int  $type
+     * @param  array|string|mixed  $errorData
      * @param  int|null  $code
      * @return self
      */
-    public function fail(?int $code = null): self
+    public function error(int $type = self::ERROR_TYPE_MESSAGE, $errorData = null, ?int $code = null): self
     {
-        $this->setStatusCode($code ?? self::HTTP_BAD_REQUEST);
+        $code = $code ?? self::HTTP_BAD_REQUEST;
+        $this->setStatusCode($code);
 
-        $currentData = $this->getDecodedData();
-        $currentData['success'] = false;
+        $data = [
+            'success' => false,
+            'error' => [
+                'code' => $code,
+                'message' => self::$statusTexts[$code],
+                'type' => $type,
+            ],
+            'data' => $errorData,
+        ];
 
-        $this->setData($currentData);
-
+        $this->setData($data);
         return $this;
     }
 
