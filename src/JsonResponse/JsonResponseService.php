@@ -33,9 +33,9 @@ class JsonResponseService extends BaseJsonResponse
      * @param  int  $type
      * @param  array|string|mixed  $errorData
      * @param  int|null  $code
-     * @return self
+     * @return JsonResponseService
      */
-    public function error(int $type = self::ERROR_TYPE_MESSAGE, $errorData = null, ?int $code = null): self
+    public function error(int $type = self::ERROR_TYPE_MESSAGE, $errorData = null, ?int $code = null): JsonResponseService
     {
         $code = $code ?? self::HTTP_BAD_REQUEST;
         $this->setStatusCode($code);
@@ -59,9 +59,9 @@ class JsonResponseService extends BaseJsonResponse
      *
      * @param  mixed  $data
      * @param  int|null  $code
-     * @return self
+     * @return JsonResponseService
      */
-    public function only($data, ?int $code = null): self
+    public function only($data, ?int $code = null): JsonResponseService
     {
         if ($code !== null) {
             $this->setStatusCode($code);
@@ -77,9 +77,9 @@ class JsonResponseService extends BaseJsonResponse
      *
      * @param  bool  $value
      * @param  int|null  $code
-     * @return self
+     * @return JsonResponseService
      */
-    public function success(bool $value = true, ?int $code = null): self
+    public function success(bool $value = true, ?int $code = null): JsonResponseService
     {
         $this->setStatusCode($code ?? self::HTTP_OK);
 
@@ -110,9 +110,9 @@ class JsonResponseService extends BaseJsonResponse
      *
      * @param  mixed  $data
      * @param  int|null  $code
-     * @return self
+     * @return JsonResponseService
      */
-    public function with($data, ?int $code = null): self
+    public function with($data, ?int $code = null): JsonResponseService
     {
         if ($code !== null) {
             $this->setStatusCode($code);
