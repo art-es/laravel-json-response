@@ -1,5 +1,5 @@
 {
-    "name": "artur/laravel-json-response",
+    "name": "art-es/laravel-json-response",
     "license": "MIT",
     "description": "Package extending laravel json response.",
     "authors": [
